@@ -44,3 +44,6 @@ dotnet test
 | POST   | /api/users      | Registrar nuevo usuario  |
 | PUT    | /api/users/{id} | Actualizar usuario       |
 | DELETE | /api/users/{id} | Eliminar usuario         |
+
+##Historia
+> Modificado por Martín Valenzuela en el Laboratorio 2.
