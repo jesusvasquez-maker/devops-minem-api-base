@@ -1,0 +1,34 @@
+@HostAddress = http://localhost:5000
+
+### 1. Listar todos los usuarios
+GET {{HostAddress}}/api/users
+Accept: application/json
+
+### 2. Crear un nuevo usuario
+POST {{HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "email": "juan.perez@minem.gob.pe",
+  "rol": "Analista"
+}
+
+### 3. Obtener el usuario creado (Reemplazar {id} con el ID devuelto en la creación)
+@id = 00000000-0000-0000-0000-000000000000
+GET {{HostAddress}}/api/users/{{id}}
+Accept: application/json
+
+### 4. Actualizar un usuario
+PUT {{HostAddress}}/api/users/{{id}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos",
+  "apellido": "Pérez M.",
+  "rol": "Coordinador"
+}
+
+### 5. Eliminar un usuario
+DELETE {{HostAddress}}/api/users/{{id}}
