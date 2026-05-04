@@ -67,4 +67,5 @@ dotnet test
 ```bash
 dotnet run --project src/DevOpsMinem.API --urls http://localhost:5000
 ```
+'Considerar agregar el endpoint GET /api/Users/{id} cuando esté implementado (Issue #1)'
 
