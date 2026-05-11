@@ -1,25 +1,33 @@
 name: CI - DevOps MINEM
+
 on:
- push:
- branches: [main, develop]
- pull_request:
- branches: [main]
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
 env:
- DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '8.0.x'
+
 jobs:
- build-and-test:
- name: Build & Test (.NET 8)
- runs-on: ubuntu-latest
- steps:
- - name: Checkout código fuente
- uses: actions/checkout@v4
- - name: Configurar .NET SDK
- uses: actions/setup-dotnet@v4
- with:
- dotnet-version: ${{ env.DOTNET_VERSION }}
- - name: Restaurar dependencias
- run: dotnet restore
- - name: Compilar solución
- run: dotnet build --configuration Release --no-restore
- - name: Ejecutar tests
- run: dotnet test --no-build --verbosity normal
+  build-and-test:
+    name: Build & Test (.NET 8)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código fuente
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restaurar dependencias
+        run: dotnet restore
+
+      - name: Compilar solución
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Ejecutar tests
+        run: dotnet test --no-build --verbosity normal
