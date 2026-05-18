@@ -36,12 +36,17 @@ jobs:
 
   test:
     needs: build
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        dotnet: ['8.0.x']
+      fail-fast: false   # si uno falla, los demás continúan
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: ${{ matrix.dotnet }}
       - name: Restaurar dependencias
         run: dotnet restore
       - name: Ejecutar tests con cobertura
@@ -55,5 +60,6 @@ jobs:
       - name: Subir reporte de cobertura
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ github.run_number }}
+          name: coverage-${{ matrix.os }}-${{ github.run_number }}
           path: ./coverage
+
